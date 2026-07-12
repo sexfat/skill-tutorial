@@ -1,0 +1,412 @@
+<title>SKILL.md 寫作教學：省 token vs 浪費 token</title>
+<style>
+  :root {
+    --ink-950: #10130f;
+    --ink-900: #171b15;
+    --ink-800: #232922;
+    --ink-600: #566153;
+    --ink-400: #8b9686;
+    --ink-200: #d7dcd1;
+    --paper: #f6f4ee;
+    --paper-raised: #ffffff;
+    --line: rgba(20, 26, 18, 0.12);
+    --accent: #2f8f6f;
+    --accent-soft: rgba(47, 143, 111, 0.12);
+    --bad: #b5502f;
+    --bad-soft: rgba(181, 80, 47, 0.10);
+    --good: #2f8f6f;
+    --good-soft: rgba(47, 143, 111, 0.10);
+    --text: var(--ink-900);
+    --text-dim: var(--ink-600);
+    --surface: var(--paper);
+    --surface-raised: var(--paper-raised);
+    --border: var(--line);
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Songti TC", serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #ece9e1;
+      --text-dim: #a3ab9c;
+      --surface: #12150f;
+      --surface-raised: #191d16;
+      --border: rgba(236, 233, 225, 0.12);
+      --accent: #5fc9a3;
+      --accent-soft: rgba(95, 201, 163, 0.14);
+      --bad: #e08661;
+      --bad-soft: rgba(224, 134, 97, 0.12);
+      --good: #5fc9a3;
+      --good-soft: rgba(95, 201, 163, 0.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    --text: #ece9e1;
+    --text-dim: #a3ab9c;
+    --surface: #12150f;
+    --surface-raised: #191d16;
+    --border: rgba(236, 233, 225, 0.12);
+    --accent: #5fc9a3;
+    --accent-soft: rgba(95, 201, 163, 0.14);
+    --bad: #e08661;
+    --bad-soft: rgba(224, 134, 97, 0.12);
+    --good: #5fc9a3;
+    --good-soft: rgba(95, 201, 163, 0.12);
+  }
+  :root[data-theme="light"] {
+    --text: var(--ink-900);
+    --text-dim: var(--ink-600);
+    --surface: var(--paper);
+    --surface-raised: var(--paper-raised);
+    --border: var(--line);
+    --accent: #2f8f6f;
+    --accent-soft: rgba(47, 143, 111, 0.12);
+    --bad: #b5502f;
+    --bad-soft: rgba(181, 80, 47, 0.10);
+    --good: #2f8f6f;
+    --good-soft: rgba(47, 143, 111, 0.10);
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  body {
+    padding: 0 0 8rem;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  header.hero {
+    border-bottom: 1px solid var(--border);
+    padding: 4.5rem 0 3rem;
+    margin-bottom: 3.5rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.1rem;
+  }
+  h1 {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 4.2vw, 2.5rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+    color: var(--text);
+  }
+  .lede {
+    font-size: 1.08rem;
+    color: var(--text-dim);
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  section { margin-bottom: 4rem; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    margin-bottom: 1.4rem;
+  }
+  .step-num {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    flex: none;
+  }
+  h2 {
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  p { margin: 0 0 1rem; max-width: 66ch; }
+  section > p:last-child { margin-bottom: 0; }
+
+  .signals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 620px) { .signals { grid-template-columns: 1fr; } }
+  .signal-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.15rem 1.3rem;
+    background: var(--surface-raised);
+  }
+  .signal-card h3 {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.7rem;
+  }
+  .signal-card.yes h3 { color: var(--good); }
+  .signal-card.no h3 { color: var(--bad); }
+  .signal-card ul { margin: 0; padding-left: 1.1rem; }
+  .signal-card li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+  .signal-card li:last-child { margin-bottom: 0; }
+
+  .codepair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 700px) { .codepair { grid-template-columns: 1fr; } }
+  .codeblock { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface-raised); }
+  .codeblock .tag {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .codeblock.bad .tag { color: var(--bad); background: var(--bad-soft); }
+  .codeblock.good .tag { color: var(--good); background: var(--good-soft); }
+  .codeblock pre {
+    margin: 0;
+    padding: 0.9rem 1rem;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .codeblock code { white-space: pre; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    font-size: 0.92rem;
+  }
+  caption { text-align: left; font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); margin-bottom: 0.6rem; }
+  th, td {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+  td.num { font-variant-numeric: tabular-nums; font-family: var(--mono); }
+  .col-bad { color: var(--bad); }
+  .col-good { color: var(--good); }
+  .table-scroll { overflow-x: auto; }
+
+  .checklist {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.7rem;
+  }
+  .checklist li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-raised);
+    font-size: 0.96rem;
+  }
+  .checklist .mark {
+    font-family: var(--mono);
+    color: var(--accent);
+    flex: none;
+    margin-top: 0.1rem;
+  }
+
+  .closing {
+    border-top: 1px solid var(--border);
+    padding-top: 2.5rem;
+    margin-top: 1rem;
+  }
+  .closing p {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+  }
+  .closing strong { color: var(--text); }
+
+  ::selection { background: var(--accent-soft); }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Claude Code · Skill 撰寫教學</p>
+    <h1>同一個任務，兩種 SKILL.md：<br>省 token 與浪費 token 的差別</h1>
+    <p class="lede">以「幫我摘要一個檔案」為例，實測比較無 skill、浪費版 skill、省 token 版 skill 三種寫法，並整理出一套何時該寫 skill 的判斷準則。</p>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <span class="step-num">01</span>
+      <h2>何時該寫 skill</h2>
+    </div>
+    <p>核心判斷點是<strong>重複性</strong>加上<strong>需要行為鎖定</strong>：任務會反覆出現，而且你在乎每次結果是否一致、可預期，才值得寫成 skill。</p>
+    <div class="signals">
+      <div class="signal-card yes">
+        <h3>該寫</h3>
+        <ul>
+          <li>你發現自己每次都要重講一次同樣的限制</li>
+          <li>輸出格式／範圍需要跨對話、跨模型維持一致</li>
+          <li>任務有明確、可壓到最小必要步驟的流程</li>
+        </ul>
+      </div>
+      <div class="signal-card no">
+        <h3>先不寫</h3>
+        <ul>
+          <li>任務太少見，只出現一兩次</li>
+          <li>規則還在摸索、變動中</li>
+          <li>連你自己都還說不清楚要限制什麼</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="step-num">02</span>
+      <h2>對照案例：SKILL.md 怎麼寫壞、怎麼寫對</h2>
+    </div>
+    <p>兩份 skill 執行同一句「幫我摘要 demo/sample.py」，差異全部來自 SKILL.md 本身的指示。</p>
+    <div class="codepair">
+      <div class="codeblock bad">
+        <div class="tag">浪費版 · 節錄</div>
+        <pre><code>1. 先 ls 整個目錄了解結構
+2. find 整專案找相關檔案並全部讀取
+3. 讀目標檔案
+4. 再用 cat -n 讀一次交叉核對
+5. 把全文原封不動貼一次
+6. 每段落 ≥200 字說明
+   （做什麼／為什麼／替代寫法／
+    歷史優缺點／教學提示）
+7. 再寫一份總結的總結
+8. 主動列重構/效能/安全建議
+9. 反問使用者要不要做更多事</code></pre>
+      </div>
+      <div class="codeblock good">
+        <div class="tag">省 token 版 · 全文</div>
+        <pre><code>1. 用 Read 讀「使用者指定的
+   那一個檔案」，不額外
+   ls／find／讀其他檔案
+2. 5 條以內條列摘要：
+   用途、關鍵函式、
+   值得注意的地方
+3. 不覆述全文，不主動
+   加碼建議，除非被要求
+
+完成即結束，不需額外
+確認或提出後續選項。</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="step-num">03</span>
+      <h2>實測數據</h2>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <caption>同一任務「摘要 demo/sample.py」，三種寫法實測</caption>
+        <thead>
+          <tr>
+            <th>指標</th>
+            <th>無 skill</th>
+            <th class="col-bad">浪費版</th>
+            <th class="col-good">省 token 版</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>工具呼叫次數</td>
+            <td class="num">0</td>
+            <td class="num col-bad">4</td>
+            <td class="num col-good">0</td>
+          </tr>
+          <tr>
+            <td>讀同一檔案次數</td>
+            <td class="num">1</td>
+            <td class="num col-bad">2</td>
+            <td class="num col-good">1</td>
+          </tr>
+          <tr>
+            <td>輸出字數（約）</td>
+            <td class="num">90</td>
+            <td class="num col-bad">1300</td>
+            <td class="num col-good">90</td>
+          </tr>
+          <tr>
+            <td>覆述原文</td>
+            <td>否</td>
+            <td class="col-bad">是</td>
+            <td class="col-good">否</td>
+          </tr>
+          <tr>
+            <td>主動加碼建議</td>
+            <td>否</td>
+            <td class="col-bad">是</td>
+            <td class="col-good">否</td>
+          </tr>
+          <tr>
+            <td>行為穩定性</td>
+            <td>中（靠模型當下判斷）</td>
+            <td class="col-bad">低（固定但固定得浪費）</td>
+            <td class="col-good">高（收斂在同一格式）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1.25rem; color:var(--text-dim); font-size:0.95rem;">浪費版光輸出字數就是省 token 版的約 14 倍，而 <code style="font-family:var(--mono)">ls</code>／<code style="font-family:var(--mono)">find</code>／二次讀取，都是任務本身不需要的動作。</p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="step-num">04</span>
+      <h2>寫 skill 的檢查清單</h2>
+    </div>
+    <ul class="checklist">
+      <li><span class="mark">→</span><span><strong>description 要精準</strong>——寫清楚觸發條件與適用場景，避免用「任何檔案」「所有情況」這種寬泛字眼，否則會在不該觸發時被誤選中。</span></li>
+      <li><span class="mark">→</span><span><strong>步驟對齊任務真正需要的最小動作</strong>——每加一個步驟都問：不做這步，摘要會不會就是錯的？答案是不會，就刪掉。</span></li>
+      <li><span class="mark">→</span><span><strong>輸出要有明確邊界</strong>——不覆述輸入、不主動加碼、不反問不必要的後續選項，除非使用者要求。</span></li>
+      <li><span class="mark">→</span><span><strong>要有明確終止條件</strong>——寫清楚「做完這幾步就結束」，避免模型為了「保險」而不斷自我驗證、重複讀取。</span></li>
+    </ul>
+  </section>
+
+  <section class="closing">
+    <p>Skill 真正的價值不是「省 token」本身，而是把行為<strong>鎖定成可預期、可重複的結果</strong>。省 token 版只是把這個約束寫得夠精簡；真正會爆量的，是把「不必要的步驟」寫死進流程裡。</p>
+  </section>
+</div>
