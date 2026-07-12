@@ -10,3 +10,6 @@ Repo: https://github.com/sexfat/skill-tutorial
 - `.claude/skills/summarize-file-good/SKILL.md`：省 token 示範版，只做任務必要的最小動作，輸出精簡條列摘要。
 - `demo/sample.py`：用來被摘要的範例檔案。
 - `demo/skill-writing-tutorial.html`：教學頁面，整理對照案例、實測數據與撰寫 skill 的檢查清單。
+
+## 講義連結
+https://claude.ai/code/artifact/f80ebef3-9f7e-4452-afdd-0f22a9de155e
